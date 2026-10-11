@@ -1,0 +1,10 @@
+<h2>{{ id() ? 'Editar producto' : 'Nuevo producto' }}</h2>
+@if (error()) { <div class="alerta" role="alert">{{ error() }}</div> }
+@if (cargando()) { <p role="status">Cargando datos…</p> }
+<form class="card" [formGroup]="form" (ngSubmit)="guardar()"><fieldset class="form-fields" [disabled]="cargando() || guardando() || cargaFallida()"><div class="form-grid">
+<label>Nombre<input class="input" formControlName="nombre" />@if(form.controls.nombre.touched && form.controls.nombre.invalid){<small class="field-error">Ingrese entre 3 y 150 caracteres.</small>}</label>
+<label>Categoría<select class="input" formControlName="categoria"><option [ngValue]="null">Seleccionar</option>@for(c of categorias(); track c.id){<option [ngValue]="c.id">{{c.nombre}}{{ c.estado ? '' : ' (inactiva)' }}</option>}</select>@if(form.controls.categoria.touched && form.controls.categoria.invalid){<small class="field-error">Seleccione una categoría.</small>}</label>
+<label>Precio en soles<input class="input" type="number" min="0.01" step="0.01" formControlName="precio" />@if(form.controls.precio.touched && form.controls.precio.invalid){<small class="field-error">Precio mayor que cero con hasta dos decimales.</small>}</label>
+<label>Stock<input class="input" type="number" min="0" step="1" formControlName="stock" />@if(form.controls.stock.touched && form.controls.stock.invalid){<small class="field-error">Ingrese un entero mayor o igual a cero.</small>}</label>
+<label class="check"><input type="checkbox" formControlName="estado" /> Activo</label></div></fieldset>
+<div class="actions"><button class="btn btn-primary" [disabled]="cargando() || guardando() || cargaFallida()">{{ guardando() ? 'Guardando…' : 'Guardar' }}</button><a class="btn" routerLink="/productos">Cancelar</a></div></form>

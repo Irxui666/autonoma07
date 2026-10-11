@@ -1,0 +1,15 @@
+<h2>{{ id() ? 'Editar cliente' : 'Nuevo cliente' }}</h2>
+@if (error()) { <div class="alerta" role="alert">{{ error() }}</div> }
+@if (cargando()) { <p role="status">Cargando cliente…</p> }
+<form class="card" [formGroup]="form" (ngSubmit)="guardar()">
+  <fieldset class="form-fields" [disabled]="guardando() || cargando() || cargaFallida()"><div class="form-grid">
+    @for (field of campos; track field.key) {
+      <label>{{ field.label }}<input class="input" [type]="field.type" [formControlName]="field.key" />
+        @if (form.controls[field.key].touched && form.controls[field.key].invalid) { <small class="field-error">{{ field.hint }}</small> }
+        @if (erroresServidor()[field.key]) { <small class="field-error">{{ erroresServidor()[field.key] }}</small> }
+      </label>
+    }
+    <label class="check"><input type="checkbox" formControlName="estado" /> Activo</label>
+  </div></fieldset>
+  <div class="actions"><button class="btn btn-primary" type="submit" [disabled]="guardando() || cargando() || cargaFallida()">{{ guardando() ? 'Guardando…' : 'Guardar' }}</button><a class="btn" routerLink="/clientes">Cancelar</a></div>
+</form>

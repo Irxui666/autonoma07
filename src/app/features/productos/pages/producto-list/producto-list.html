@@ -1,0 +1,8 @@
+<div class="page-header"><h2>Productos</h2><div class="actions"><button class="btn" (click)="cargar()" [disabled]="cargando()">Actualizar stock</button><a class="btn btn-primary" routerLink="nuevo">Nuevo producto</a></div></div>
+@if (error()) { <div class="alerta" role="alert">{{ error() }}</div> }
+@if (exito()) { <div class="exito" role="status">{{ exito() }}</div> }
+<label class="search">Buscar por nombre o categoría<input class="input" [value]="filtro()" (input)="filtro.set($any($event.target).value)" /></label>
+@if (cargando()) { <p role="status">Cargando productos…</p> } @else {
+<div class="table-wrap"><table class="tabla"><thead><tr><th>Producto</th><th>Categoría</th><th>Precio</th><th>Stock</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>
+@for (p of filtrados(); track p.id) { <tr><td>{{ p.nombre }}</td><td>{{ p.categoriaNombre }}</td><td class="monto">{{ p.precio | currency:'PEN':'S/ ' }}</td><td>{{ p.stock }}</td><td><span class="badge" [class.inactivo]="!p.estado">{{ p.estado ? 'Activo' : 'Inactivo' }}</span></td><td><div class="actions"><a class="btn" [routerLink]="[p.id,'editar']">Editar</a><button class="btn btn-peligro" (click)="eliminar(p)" [disabled]="eliminando()">Eliminar</button></div></td></tr> } @empty { <tr><td colspan="6">No hay productos para mostrar.</td></tr> }
+</tbody></table></div> }
