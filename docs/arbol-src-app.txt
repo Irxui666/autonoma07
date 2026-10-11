@@ -1,0 +1,61 @@
+src/app/
+app.config.ts
+app.css
+app.html
+app.routes.ts
+app.spec.ts
+app.ts
+    menu.ts
+    error-response.ts
+    pagina-response.ts
+    http-error.ts
+    numeros.ts
+    texto.ts
+    categorias.routes.ts
+      categoria.model.ts
+        categoria-form.css
+        categoria-form.html
+        categoria-form.spec.ts
+        categoria-form.ts
+        categoria-list.css
+        categoria-list.html
+        categoria-list.spec.ts
+        categoria-list.ts
+      categoria-service.spec.ts
+      categoria-service.ts
+    clientes.routes.ts
+      cliente.model.ts
+        cliente-form.html
+        cliente-form.spec.ts
+        cliente-form.ts
+        cliente-list.html
+        cliente-list.spec.ts
+        cliente-list.ts
+      cliente-service.ts
+    inicio.css
+    inicio.html
+    inicio.spec.ts
+    inicio.ts
+      producto.model.ts
+        producto-form.html
+        producto-form.ts
+        producto-list.html
+        producto-list.ts
+    productos.routes.ts
+      producto-service.ts
+    header.css
+    header.html
+    header.spec.ts
+    header.ts
+    main-layout.css
+    main-layout.html
+    main-layout.spec.ts
+    main-layout.ts
+    sidebar.css
+    sidebar.html
+    sidebar.spec.ts
+    sidebar.ts
+      no-encontrado.css
+      no-encontrado.html
+      no-encontrado.spec.ts
+      no-encontrado.ts

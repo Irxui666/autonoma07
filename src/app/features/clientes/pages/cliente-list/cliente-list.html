@@ -1,0 +1,18 @@
+<div class="page-header"><h2>Clientes</h2><a class="btn btn-primary" routerLink="nuevo">Nuevo cliente</a></div>
+@if (error()) { <div class="alerta" role="alert">{{ error() }} <button class="btn" (click)="cargar()">Reintentar</button></div> }
+@if (exito()) { <div class="exito" role="status">{{ exito() }}</div> }
+<label class="search">Buscar por DNI, nombre o correo<input class="input" [value]="filtro()" (input)="filtro.set($any($event.target).value)" /></label>
+@if (cargando()) { <p role="status">Cargando clientes…</p> } @else {
+  <div class="table-wrap"><table class="tabla"><thead><tr><th><button class="btn" (click)="ordenar('dni')">DNI {{ ordenarPor() === 'dni' ? direccion() : '' }}</button></th><th><button class="btn" (click)="ordenar('apellidos')">Apellidos y nombres {{ ordenarPor() === 'apellidos' ? direccion() : '' }}</button></th><th>Correo</th><th>Teléfono</th><th>Estado</th><th>Acciones</th></tr></thead><tbody>
+    @for (c of filtrados(); track c.id) {
+      <tr><td>{{ c.dni }}</td><td>{{ c.apellidos }}, {{ c.nombres }}</td><td>{{ c.email }}</td><td>{{ c.telefono ?? '—' }}</td><td><span class="badge" [class.inactivo]="!c.estado">{{ c.estado ? 'Activo' : 'Inactivo' }}</span></td><td class="actions"><a class="btn" [routerLink]="[c.id, 'editar']">Editar</a><button class="btn btn-peligro" (click)="eliminar(c)" [disabled]="eliminando()">Dar de baja</button></td></tr>
+    } @empty { <tr><td colspan="6">No hay clientes para mostrar.</td></tr> }
+  </tbody></table></div>
+}
+
+<div class="actions">
+  <label>Tamaño de página <select class="input" [value]="tamanio()" (change)="cambiarTamanio($any($event.target).value)" [disabled]="cargando()"><option value="5">5</option><option value="10">10</option><option value="20">20</option></select></label>
+  <button class="btn" (click)="cambiarPagina(-1)" [disabled]="pagina() === 0 || cargando()">Anterior</button>
+  <span>Página {{ totalPaginas() === 0 ? 0 : pagina() + 1 }} de {{ totalPaginas() }} · {{ totalElementos() }} clientes</span>
+  <button class="btn" (click)="cambiarPagina(1)" [disabled]="ultima() || cargando()">Siguiente</button>
+</div>

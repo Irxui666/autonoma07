@@ -1,0 +1,24 @@
+Validación ejecutada el 11/10/2026
+
+FRONTEND
+npm ci: completado (267 paquetes).
+npm run build: correcto.
+Lazy chunk files:
+chunk-BMcrz_Lb.js | clientes-routes | 10.43 kB | transferencia estimada 3.38 kB
+chunk-9IsfhL_-.js | categorias-routes | 8.48 kB | transferencia estimada 2.85 kB
+npm test -- --watch=false: 11 archivos y 14 pruebas aprobadas.
+Incluye pruebas de formulario Clientes, paginación, filtro local, recarga tras baja y Categorías.
+
+BACKEND
+mvnw.cmd -DskipTests package: BUILD SUCCESS.
+mvnw.cmd "-Dtest=CategoriaServiceRulesTest,ClienteServiceRulesTest" test: BUILD SUCCESS.
+5 pruebas ejecutadas, 0 fallos, 0 errores.
+No se ejecutó la prueba de arranque que depende de Oracle.
+
+PDF
+5 páginas. Renderizado con Poppler y revisión visual sin cortes ni superposiciones.
+
+LIMITACIONES
+API no activa en localhost:8080 durante la revisión.
+Las pruebas unitarias usan HTTP simulado o repositorios mock; no reemplazan A7.
+Pendientes: once capturas reales con Red visible, datos de autor, repositorio Git, rama, historial de tres días, PR y subida al aula.
