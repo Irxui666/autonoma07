@@ -1,0 +1,6 @@
+spring:
+  application:
+    name: Actividad01
+
+  profiles:
+    active: dev
