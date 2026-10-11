@@ -22,12 +22,10 @@ h('PharmaSoft | Informe técnico de arquitectura')
 p('Lenguaje de Programación II · Actividad autónoma de la sesión 7 · 11 de octubre de 2026. Autor: pendiente de completar con el nombre del estudiante.')
 p('Alcance: revisión y adaptación del módulo Clientes existente en tarea07-frontend, con compatibilidad del backend local. Este informe describe el código entregado; las evidencias de navegador y la entrega Git se identifican como pendientes cuando no se han ejecutado.')
 h('B1. Estructura del proyecto')
-# Árbol completo de producción; specs se indican por separado.
 paths=sorted((root/'src/app').rglob('*')); tree=['src/app/']
 for f in paths:
     if f.is_file():
         rel=f.relative_to(root/'src/app'); tree.append('  '*(len(rel.parts)-1)+f.name)
-# Compact directory tree with every production file grouped by folder, to fit page.
 for folder in ['core','shared','layout','features']:
     pass
 code('src/app/\n  app.ts, app.html, app.css, app.config.ts, app.routes.ts\n  core/\n    config/menu.ts\n    models/{error-response,pagina-response}.ts\n    utils/{http-error,numeros,texto}.ts\n  shared/pages/no-encontrado/ [ts, html, css]\n  layout/{header,sidebar,main-layout}/ [ts, html, css]\n  features/\n    inicio/ [ts, html, css]\n    categorias/\n      categorias.routes.ts\n      models/categoria.model.ts\n      services/categoria-service.ts\n      pages/{categoria-list,categoria-form}/ [ts, html, css]\n    clientes/\n      clientes.routes.ts\n      models/cliente.model.ts\n      services/cliente-service.ts\n      pages/{cliente-list,cliente-form}/ [ts, html]\n    productos/\n      productos.routes.ts\n      models/producto.model.ts\n      services/producto-service.ts\n      pages/{producto-list,producto-form}/ [ts, html]')
@@ -41,7 +39,7 @@ h('B3. Responsabilidades y límites')
 table([['Pieza','Qué hace','Qué no hace'],['ClienteService / servicio','Cinco operaciones HTTP tipadas, parámetros de página.','No presenta mensajes ni navega.'],['ClienteList / componente','Signals, filtro computed, orden, página y baja.','No construye HTTP ni valida unicidad.'],['ClienteForm / componente','Validación, carga por ID, DTO, guardar y navegar.','No decide unicidad ni persiste directamente.'],['CategoriaService / servicio','Encapsula HTTP de Categorías.','No controla la vista.'],['CategoriaList / componente','Carga, búsqueda local y eliminación de categorías.','No conoce URL ni consulta la base de datos.'],['CategoriaForm / componente','Formulario reactivo, edición y errores.','No implementa reglas de integridad del servidor.'],['MainLayout / componente','Header, Sidebar, outlet y menú colapsado.','No administra entidades.'],['Header / componente','Marca, enlaces y evento toggleMenu.','No consulta clientes.'],['Sidebar / componente','Recorre MENU y marca ruta activa.','No realiza CRUD ni autentica usuarios.']],[112,190,185])
 page();h('B4. Flujo de registrar cliente')
 p('El diagrama sigue las llamadas reales del formulario y del listado; el signal de clientes se actualiza después del GET posterior a la navegación, no con el POST directamente.')
-# Diagrama vectorial integrado
+
 from reportlab.graphics.shapes import Drawing,Rect,String,Line,Polygon
 d=Drawing(480,310)
 def box(x,y,w,label):
